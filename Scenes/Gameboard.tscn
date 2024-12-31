@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://0p1histnip04"]
+
+[ext_resource type="Script" path="res://Scripts/gameboard.gd" id="1_wgspl"]
+
+[node name="GameBoard" type="Node2D"]
+script = ExtResource("1_wgspl")
+active_color = Color(0.924214, 0.78624, 0.81682, 1)
+inactive_color = Color(0.230315, 0.230315, 0.230315, 1)
+visited_color = Color(0.889596, 0.872289, 0.518598, 1)
+fail_flash_color = Color(0.858714, 0.346935, 0.278506, 1)
+success_flash_color = Color(0.478431, 0.847059, 0.372549, 1)
+flash_duration = 0.03
+min_board_size = 3
+max_board_size = 5
+min_obstacle_count = 2
+max_obstacle_count = 7

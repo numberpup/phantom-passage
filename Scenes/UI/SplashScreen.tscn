@@ -1,0 +1,177 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdttlns30px5k"]
+
+[ext_resource type="Script" path="res://Scripts/UI/splash_screen.gd" id="1_5jtlb"]
+[ext_resource type="Texture2D" uid="uid://edkm6cvcxusl" path="res://Assets/SplashSprites/Diamond.png" id="2_2gh8y"]
+[ext_resource type="FontFile" uid="uid://c4hsx53rjc3e8" path="res://Assets/NESCyrillic.ttf" id="3_l4ewp"]
+
+[sub_resource type="Animation" id="Animation_gqwrn"]
+resource_name = "Fade_In_Diamond"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_exfgq"]
+resource_name = "Fade_In_Hackleton"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nbx0l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yevu8"]
+resource_name = "Spin_Diamond"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_30fmb"]
+_data = {
+"Fade_In_Diamond": SubResource("Animation_gqwrn"),
+"Fade_In_Hackleton": SubResource("Animation_exfgq"),
+"RESET": SubResource("Animation_nbx0l"),
+"Spin_Diamond": SubResource("Animation_yevu8")
+}
+
+[node name="SplashScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5jtlb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2450.5
+offset_top = -1600.0
+offset_right = 2450.5
+offset_bottom = 1600.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.841
+anchor_right = 0.5
+anchor_bottom = 0.841
+offset_left = -445.0
+offset_top = -71.0
+offset_right = 445.0
+offset_bottom = 71.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("3_l4ewp")
+theme_override_font_sizes/normal_font_size = 200
+text = "HACKLETON"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="AnimationFadeDiamond" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_30fmb")
+}
+
+[node name="AnimationFadeText" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_30fmb")
+}
+
+[node name="AnimationSpinDiamond" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_30fmb")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1077, 1077)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -538.5
+offset_top = -538.5
+offset_right = 538.5
+offset_bottom = 538.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
+position = Vector2(542.5, 497.5)
+scale = Vector2(37.98, 37.98)
+texture = ExtResource("2_2gh8y")

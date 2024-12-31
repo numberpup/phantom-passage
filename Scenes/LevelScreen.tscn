@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfsssk8hlmral"]
+
+[ext_resource type="Texture2D" uid="uid://i0gii2epgm70" path="res://Assets/spookyhallway.png" id="1_5jgay"]
+[ext_resource type="Script" path="res://Scripts/level_screen.gd" id="1_w7rh0"]
+[ext_resource type="PackedScene" uid="uid://0p1histnip04" path="res://Scenes/Gameboard.tscn" id="2_8fo4w"]
+[ext_resource type="FontFile" uid="uid://c4hsx53rjc3e8" path="res://Assets/NESCyrillic.ttf" id="3_6xjha"]
+[ext_resource type="PackedScene" uid="uid://csrr4nf3h47p8" path="res://Scripts/UI/SceneTransition.tscn" id="5_d1jak"]
+
+[node name="LevelScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w7rh0")
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2560.0
+offset_top = -1440.0
+offset_right = 2560.0
+offset_bottom = 1440.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5jgay")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="EnemyContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(700, 700)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -660.0
+offset_right = 350.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(900, 900)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.955
+anchor_right = 0.5
+anchor_bottom = 0.955
+offset_left = -450.0
+offset_top = -900.0
+offset_right = 450.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GameBoard" parent="MarginContainer" instance=ExtResource("2_8fo4w")]
+active_color = Color(0.95, 0.85, 0.95, 1)
+inactive_color = Color(0.3, 0.3, 0.3, 1)
+visited_color = Color(0.95, 0.9, 0.4, 1)
+fail_flash_color = Color(0.9, 0.3, 0.2, 1)
+success_flash_color = Color(0.3, 0.9, 0.4, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -287.0
+offset_top = 50.0
+offset_right = -45.0
+offset_bottom = 154.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_6xjha")
+theme_override_font_sizes/font_size = 100
+text = "BACK"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -287.0
+offset_top = 170.0
+offset_right = -45.0
+offset_bottom = 274.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_6xjha")
+theme_override_font_sizes/font_size = 100
+text = "MENU"
+
+[node name="ScoreDisplay" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_left = 69.0
+offset_top = 41.0
+offset_right = 280.0
+offset_bottom = 131.0
+theme_override_fonts/normal_font = ExtResource("3_6xjha")
+theme_override_font_sizes/normal_font_size = 100
+text = "0"
+
+[node name="SceneTransition" parent="." instance=ExtResource("5_d1jak")]
+
+[connection signal="board_clear" from="MarginContainer/GameBoard" to="." method="_on_game_board_board_clear"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

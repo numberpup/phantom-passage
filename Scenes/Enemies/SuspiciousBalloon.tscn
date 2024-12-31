@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b33milkmfou3i"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/SuspiciousBalloon.gd" id="1_ow35r"]
+
+[node name="SuspiciousBalloon" type="Node2D"]
+script = ExtResource("1_ow35r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
