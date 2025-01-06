@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cykd3ju2vtadc"]
+[gd_scene load_steps=2 format=3 uid="uid://cykd3ju2vtadc"]
+
+[ext_resource type="Script" path="res://Scripts/UI/info_bar.gd" id="1_a8nme"]
 
 [node name="InfoBar" type="Control"]
 layout_mode = 3
@@ -7,3 +9,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_a8nme")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_right = 340.0
+offset_bottom = 181.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+show_percentage = false
+
+[node name="MenuButton" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 181.0
+grow_horizontal = 0
+
+[node name="BackButton" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 181.0
+
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

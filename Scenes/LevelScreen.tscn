@@ -68,35 +68,8 @@ visited_color = Color(0.95, 0.9, 0.4, 1)
 fail_flash_color = Color(0.9, 0.3, 0.2, 1)
 success_flash_color = Color(0.3, 0.9, 0.4, 1)
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -287.0
-offset_top = 50.0
-offset_right = -45.0
-offset_bottom = 154.0
-grow_horizontal = 0
-theme_override_fonts/font = ExtResource("3_6xjha")
-theme_override_font_sizes/font_size = 100
-text = "BACK"
-
-[node name="Button2" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -287.0
-offset_top = 170.0
-offset_right = -45.0
-offset_bottom = 274.0
-grow_horizontal = 0
-theme_override_fonts/font = ExtResource("3_6xjha")
-theme_override_font_sizes/font_size = 100
-text = "MENU"
-
 [node name="ScoreDisplay" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 1
 offset_left = 69.0
 offset_top = 41.0
@@ -109,5 +82,3 @@ text = "0"
 [node name="SceneTransition" parent="." instance=ExtResource("5_d1jak")]
 
 [connection signal="board_clear" from="MarginContainer/GameBoard" to="." method="_on_game_board_board_clear"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

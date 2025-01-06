@@ -89,9 +89,7 @@ func _ready() -> void:
 
 func setup_health_bar() -> void:
 	# Load and instance the HealthBar scene
-	var health_bar_scene = preload("res://Scenes/UI/HealthBar.tscn")
-	health_bar = health_bar_scene.instantiate()
-	add_child(health_bar)
+	var health_bar = $LevelScreen/InfoBar
 
 	# Calculate proportional size based on the sprite's scale
 	var sprite_width = sprite_x_dim * animated_sprite.scale.x  # Assume 32px per frame width
