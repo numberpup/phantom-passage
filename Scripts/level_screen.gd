@@ -11,7 +11,8 @@ func _ready() -> void:
 	$SceneTransition/AnimationPlayer.play("fade_out")
 
 	score_display.text = str(score)
-	connect_board_clear_signal()  # Connect the signal for all necessary nodes
+	connect_board_clear_signal()  # Connect the board clear signal
+	
 	instantiate_enemy()
 
 
@@ -31,13 +32,6 @@ func _on_game_board_board_clear() -> void:
 func instantiate_enemy() -> void:
 	var enemy_scene
 	
-	# randi() % (max - min + 1) + min
-	# 0, 1, 2  (2 - 0 + 1) + 0
-	#if randi() % (3) == 0:  # Randomly choose an enemy
-		#enemy_scene = preload("res://Scenes/Enemies/FunkyBeetle.tscn")
-	#elif randi() % (3) == 1:
-		#enemy_scene = preload("res://Scenes/Enemies/SuspiciousBalloon.tscn")
-	#else:
 	enemy_scene = preload("res://Scenes/Enemies/EnemyShell.tscn")
 	var enemy_instance = enemy_scene.instantiate()
 	
@@ -58,18 +52,27 @@ func instantiate_enemy() -> void:
 		
 	#enemy_instance.modulate = get_random_tint()
 
-	# Connect the GameBoard's `board_clear` signal to the NiceTorso's `_on_game_board_board_clear` method
+	# Connect the GameBoard's `board_clear` signal to the enemy's `_on_game_board_board_clear` method
 	if game_board:
 		game_board.connect("board_clear", Callable(enemy_instance, "_on_game_board_board_clear"))
 
-	# Connect the `enemy_died` signal to reinstantiate a new enemy
+	# Connect the enemy_died signal to reinstantiate a new enemy
 	enemy_instance.connect("enemy_died", Callable(self, "_on_enemy_died"))
+	
+	# Connect the updated_enemy_health signal so the infobar can be updated
+	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
 
 # Signal handler for enemy death
 func _on_enemy_died() -> void:
 	print("Enemy died. Instantiating a new one...")
 	instantiate_enemy()
 
+# Signal handler for enemy health update
+func _on_enemy_health_updated() -> void:
+	var infoBar = $InfoBar
+	infoBar.update_health()
+
+# Generates random tint values for when modulating enemy colors for variety
 func get_random_tint(base_color: Color = Color(1, 1, 1)) -> Color:
 	# Generate larger random offsets for RGB values
 	var red_offset = randf_range(-0.8, 0.8)  # Stronger tint range

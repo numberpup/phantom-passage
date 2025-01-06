@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cykd3ju2vtadc"]
+[gd_scene load_steps=5 format=3 uid="uid://cykd3ju2vtadc"]
 
 [ext_resource type="Script" path="res://Scripts/UI/info_bar.gd" id="1_a8nme"]
+[ext_resource type="FontFile" uid="uid://c4hsx53rjc3e8" path="res://Assets/NESCyrillic.ttf" id="2_6ndql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syowa"]
+bg_color = Color(1, 1, 1, 0.235294)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekp7y"]
+bg_color = Color(0.803922, 0, 0.152941, 1)
 
 [node name="InfoBar" type="Control"]
 layout_mode = 3
@@ -27,6 +34,8 @@ custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_syowa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ekp7y")
 show_percentage = false
 
 [node name="MenuButton" type="Button" parent="."]
@@ -38,12 +47,18 @@ anchor_right = 1.0
 offset_left = -200.0
 offset_bottom = 181.0
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_6ndql")
+theme_override_font_sizes/font_size = 90
+text = "MENU"
 
 [node name="BackButton" type="Button" parent="."]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 offset_right = 200.0
 offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("2_6ndql")
+theme_override_font_sizes/font_size = 90
+text = "BACK"
 
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -31,6 +31,12 @@ var player_upgrades = [] # Stores acquired and active Artifacts.
 var board_size = 3
 var board_obstacle_count = 3
 
+# Enemy state and effects
+var enemy_health_max = 100
+var enemy_health = 100
+var enemy_attack = 10
+var enemy_effects = []
+
 # Turn management variables
 @export var turn_time: float = 15.0
 

@@ -21,6 +21,7 @@ var health_bar
 
 # Signals
 signal enemy_died
+signal updated_enemy_health
 
 # INITIALIZATION INSTRUCTIONS:
 # TO USE: CALL _setup(enemy_key, enemy_type)
@@ -48,6 +49,12 @@ func enemy_init(enemy: String) -> void:
 	max_health = InfoTable.enemies[enemy]["hp"]
 	attack_power = InfoTable.enemies[enemy]["atk"]
 	
+	# Update global enemy stats
+	GameManager.enemy_health_max = max_health
+	GameManager.enemy_health = health
+	GameManager.enemy_attack = attack_power
+	
+	
 	# Sprite info
 	sprite = InfoTable.enemies[enemy]["sprite"]
 	sprite_x_dim = InfoTable.enemies[enemy]["sprite_x_dim"]
@@ -67,7 +74,6 @@ func mini_boss_init(enemy: String) -> void:
 	health = InfoTable.mini_bosses[enemy]["hp"]
 	max_health = InfoTable.mini_bosses[enemy]["hp"]
 	attack_power = InfoTable.mini_bosses[enemy]["atk"]
-	pass
 
 func boss_init(enemy: String) -> void:
 	pass
@@ -80,29 +86,37 @@ func _ready() -> void:
 	# Set up the animation
 	setup_animation()
 	
-	# Set up the health bar
-	setup_health_bar()
+	
+	
+	# Emit signal indicating the global health was updated
+	emit_signal("updated_enemy_health")
 	
 	# Force scale both on the root node and the AnimatedSprite2D
 	scale = Vector2(size_mult, size_mult)  # Scale the root node
 	animated_sprite.scale = Vector2(size_mult, size_mult)  # Scale the sprite further if needed
 
-func setup_health_bar() -> void:
-	# Load and instance the HealthBar scene
-	var health_bar = $LevelScreen/InfoBar/ProgressBar
-
-	# Initialize the health bar values
-	health_bar.max_health = max_health
-	health_bar.current_health = health
-	health_bar.setup_health_bar()
+#func setup_health_bar() -> void:
+	## Load and instance the HealthBar scene
+	#var health_bar = $LevelScreen/InfoBar/ProgressBar
+#
+	## Initialize the health bar values
+	#health_bar.max_health = max_health
+	#health_bar.current_health = health
+	#health_bar.setup_health_bar()
 
 
 func take_damage(amount: int) -> void:
 	health -= amount
+	
+	# Update global enemy_health variable
+	GameManager.enemy_health = health
+	
 	if health <= 0:
 		health = 0
 		die()
-	update_health_bar()
+		
+	# CALL AN updated_enemy_health SIGNAL
+	emit_signal("updated_enemy_health")
 
 
 func setup_animation() -> void:
@@ -146,18 +160,18 @@ func setup_animation() -> void:
 	animated_sprite.speed_scale = speed_mult
 	animated_sprite.scale = Vector2(size_mult, size_mult)  # Scale up for visibility
 
-func update_health_bar() -> void:
-	if health_bar:
-		print("Animating health bar to:", health)
-
-		# Create a tween to smoothly animate the health bar value
-		var tween = create_tween()
-		tween.tween_property(
-			health_bar.progress_bar,  # Tween the ProgressBar node
-			"value",  # Animate the `value` property
-			health,  # Target value
-			0.3  # Duration in seconds
-		).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+#func update_health_bar() -> void:
+	#if health_bar:
+		#print("Animating health bar to:", health)
+#
+		## Create a tween to smoothly animate the health bar value
+		#var tween = create_tween()
+		#tween.tween_property(
+			#health_bar.progress_bar,  # Tween the ProgressBar node
+			#"value",  # Animate the `value` property
+			#health,  # Target value
+			#0.3  # Duration in seconds
+		#).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 
 # Signal handler for `board_clear`
