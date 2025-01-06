@@ -89,18 +89,7 @@ func _ready() -> void:
 
 func setup_health_bar() -> void:
 	# Load and instance the HealthBar scene
-	var health_bar = $LevelScreen/InfoBar
-
-	# Calculate proportional size based on the sprite's scale
-	var sprite_width = sprite_x_dim * animated_sprite.scale.x  # Assume 32px per frame width
-	var sprite_height = sprite_y_dim * animated_sprite.scale.y  # Assume 32px per frame height
-
-	# Set the size of the HealthBar's root container
-	var bar_width = sprite_width * 1.2  # Health bar width is 1.2x the sprite width
-	health_bar.set_size(Vector2(bar_width, 10))  # Set size for the container node
-
-	# Center and position the health bar above the sprite
-	health_bar.position = Vector2(-bar_width / 2, -sprite_height - sprite_offset)  # Centered above the sprite
+	var health_bar = $LevelScreen/InfoBar/ProgressBar
 
 	# Initialize the health bar values
 	health_bar.max_health = max_health
@@ -169,19 +158,6 @@ func update_health_bar() -> void:
 			health,  # Target value
 			0.3  # Duration in seconds
 		).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
-# Create a health bar for the enemy
-func create_health_bar() -> ProgressBar:
-	var health_bar = ProgressBar.new()
-
-	# Set health bar appearance
-	health_bar.value = health
-	health_bar.max_value = max_health
-
-	# Resize and position health bar
-	health_bar.custom_minimum_size = Vector2(700, 100)  # Make the health bar 700x100 pixels
-
-	return health_bar
 
 
 # Signal handler for `board_clear`

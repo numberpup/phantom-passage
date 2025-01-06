@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfsssk8hlmral"]
+[gd_scene load_steps=7 format=3 uid="uid://dfsssk8hlmral"]
 
 [ext_resource type="Texture2D" uid="uid://i0gii2epgm70" path="res://Assets/spookyhallway.png" id="1_5jgay"]
 [ext_resource type="Script" path="res://Scripts/level_screen.gd" id="1_w7rh0"]
 [ext_resource type="PackedScene" uid="uid://0p1histnip04" path="res://Scenes/Gameboard.tscn" id="2_8fo4w"]
 [ext_resource type="FontFile" uid="uid://c4hsx53rjc3e8" path="res://Assets/NESCyrillic.ttf" id="3_6xjha"]
 [ext_resource type="PackedScene" uid="uid://csrr4nf3h47p8" path="res://Scripts/UI/SceneTransition.tscn" id="5_d1jak"]
+[ext_resource type="PackedScene" uid="uid://cykd3ju2vtadc" path="res://Scenes/UI/InfoBar.tscn" id="6_88dgy"]
 
 [node name="LevelScreen" type="Control"]
 layout_mode = 3
@@ -80,5 +81,8 @@ theme_override_font_sizes/normal_font_size = 100
 text = "0"
 
 [node name="SceneTransition" parent="." instance=ExtResource("5_d1jak")]
+
+[node name="InfoBar" parent="." instance=ExtResource("6_88dgy")]
+layout_mode = 1
 
 [connection signal="board_clear" from="MarginContainer/GameBoard" to="." method="_on_game_board_board_clear"]
