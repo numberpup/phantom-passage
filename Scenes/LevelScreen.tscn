@@ -87,3 +87,4 @@ text = "0"
 layout_mode = 1
 
 [connection signal="board_clear" from="MarginContainer/GameBoard" to="." method="_on_game_board_board_clear"]
+[connection signal="turn_start" from="MarginContainer/GameBoard" to="." method="_on_player_turn_start"]

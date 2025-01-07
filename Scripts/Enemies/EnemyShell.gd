@@ -1,6 +1,8 @@
 extends Node2D
 var InfoTable
 @onready var animated_sprite = $AnimatedSprite2D  # Reference to the AnimatedSprite2D node
+@onready var attack_sprite = $AttackAnimatedSprite2D  # Reference to the attack animation node
+
 var health_bar
 @export var health: int = 100
 @export var max_health: int = 100
@@ -96,6 +98,17 @@ func _ready() -> void:
 func take_damage(amount: int) -> void:
 	health -= amount
 	
+	# Call attack animation
+	attack_animation()
+	var old_modulate = self.modulate
+	var original_position = self.position
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate", Color(69, 12, 12), .05).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "modulate", old_modulate, .05).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "position", Vector2(self.position.x+50, self.position.y-40), .01).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "position", original_position, .1).set_trans(Tween.TRANS_BOUNCE)
+
 	# Update global enemy_health variable
 	GameManager.enemy_health = health
 	
@@ -106,6 +119,39 @@ func take_damage(amount: int) -> void:
 	# CALL AN updated_enemy_health SIGNAL
 	emit_signal("updated_enemy_health")
 
+func attack_animation() -> void:
+	var sprite_frames = SpriteFrames.new()
+	var spritesheet = load("res://Assets/AnimationSprites/AttackAnim.png")
+	
+	# Define frame size and layout
+	var frame_width = 64
+	var frame_height = 64
+	var columns = 2
+	var rows = 3
+	var total_frames = 6
+	
+	# Add animation frames
+	sprite_frames.add_animation("default")
+	var frame_count = 0
+	for y in range(rows):
+		for x in range(columns):
+			if frame_count >= total_frames:  # Stop after 10 frames
+				break
+			var region = Rect2(x * frame_width, y * frame_height, frame_width, frame_height)
+			var atlas_texture = AtlasTexture.new()
+			atlas_texture.atlas = spritesheet
+			atlas_texture.region = region
+			sprite_frames.add_frame("default", atlas_texture)
+			frame_count += 1
+
+	
+	# Assign the SpriteFrames to the AnimatedSprite2D
+	sprite_frames.set_animation_loop("default", false) #make animation not loop
+	attack_sprite.frames = sprite_frames
+	#attack_sprite.animation = "default"
+	attack_sprite.play("default")  # Play the animation
+	attack_sprite.speed_scale = 6
+	attack_sprite.scale = Vector2(4, 4)  # Scale up for visibility
 
 func setup_animation() -> void:
 	# Create a new SpriteFrames resource
@@ -158,7 +204,7 @@ func _on_game_board_board_clear() -> void:
 func die() -> void:
 	print("Enemy has been defeated.")
 	
-
+	await get_tree().create_timer(.1).timeout
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, "scale", Vector2(0,0), .2).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(.1).timeout

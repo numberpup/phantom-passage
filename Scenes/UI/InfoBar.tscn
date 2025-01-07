@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cykd3ju2vtadc"]
+[gd_scene load_steps=6 format=3 uid="uid://cykd3ju2vtadc"]
 
 [ext_resource type="Script" path="res://Scripts/UI/info_bar.gd" id="1_a8nme"]
 [ext_resource type="FontFile" uid="uid://c4hsx53rjc3e8" path="res://Assets/NESCyrillic.ttf" id="2_6ndql"]
@@ -8,6 +8,9 @@ bg_color = Color(1, 1, 1, 0.235294)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekp7y"]
 bg_color = Color(0.803922, 0, 0.152941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xbba"]
+bg_color = Color(0.298039, 0.823529, 0.309804, 1)
 
 [node name="InfoBar" type="Control"]
 layout_mode = 3
@@ -24,10 +27,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -321.0
-offset_top = 2.0
-offset_right = 325.0
-offset_bottom = 82.0
+offset_left = -322.0
+offset_top = 155.0
+offset_right = 324.0
+offset_bottom = 179.0
 grow_horizontal = 2
 alignment = 1
 
@@ -38,6 +41,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_syowa")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ekp7y")
+value = 100.0
 show_percentage = false
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
@@ -45,17 +49,22 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -321.0
-offset_top = 98.0
-offset_right = 325.0
-offset_bottom = 178.0
+offset_left = -323.0
+offset_top = 2.0
+offset_right = 323.0
+offset_bottom = 26.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer2"]
+[node name="ProgressBar2" type="ProgressBar" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0, 0.894118, 0.894118, 0.192157)
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_syowa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0xbba")
+value = 100.0
+show_percentage = false
 
 [node name="MenuButton" type="Button" parent="."]
 custom_minimum_size = Vector2(200, 0)

@@ -130,11 +130,16 @@ func create_grid_from_model(model: Array) -> void:
 # INPUT HANDLING (MOUSE OR TOUCH)
 ##
 func _input(event: InputEvent) -> void:
+
 	if not board_interactable:
 		return # Ignore input if the board is not interactable
 
 	if event is InputEventScreenTouch or event is InputEventMouseButton:
+		
 		if event.pressed:
+			#indicate turn has started
+			emit_signal("turn_start")
+			
 			# Start drag
 			dragging = true
 			visited_tiles.clear()

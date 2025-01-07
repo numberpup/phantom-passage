@@ -6,3 +6,5 @@
 script = ExtResource("1_wfrdc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="AttackAnimatedSprite2D" type="AnimatedSprite2D" parent="."]

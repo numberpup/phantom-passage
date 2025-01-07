@@ -6,6 +6,8 @@ extends Control
 @onready var enemy_container = $EnemyContainer
 @onready var game_board = $MarginContainer/GameBoard  # Corrected path to GameBoard
 
+var is_player_turn = true
+
 func _ready() -> void:
 	$SceneTransition/ColorRect.color.a = 255
 	$SceneTransition/AnimationPlayer.play("fade_out")
@@ -14,6 +16,9 @@ func _ready() -> void:
 	connect_board_clear_signal()  # Connect the board clear signal
 	
 	instantiate_enemy()
+	
+	#$GameBoard.connect("turn_start", Callable(self, "_on_player_turn_start"))
+	
 
 
 # Connect `board_clear` to all relevant methods
@@ -64,11 +69,19 @@ func instantiate_enemy() -> void:
 	
 	# Connect the updated_enemy_health signal so the infobar can be updated
 	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
+	
+	# enemy has been instantiated, now it's the player's turn
+	is_player_turn = true
 
 # Signal handler for enemy death
 func _on_enemy_died() -> void:
 	print("Enemy died. Instantiating a new one...")
 	instantiate_enemy()
+
+
+func _on_player_turn_start() -> void:
+	print("player turn start called")
+	pass
 
 # Signal handler for enemy health update
 func _on_enemy_health_updated() -> void:
@@ -88,6 +101,16 @@ func get_random_tint(base_color: Color = Color(1, 1, 1)) -> Color:
 	var new_blue = clamp(base_color.b + blue_offset, 0.0, 1.0)
 
 	return Color(new_red, new_green, new_blue)
+
+
+func _player_takes_damage() -> void:
+	GameManager.player_health -= GameManager.enemy_attack
+	var infoBar = $InfoBar
+	infoBar.update_player_health()
+
+# WILL POPULATE ONCE LEVELS AND PROGRESSION ARE IMPLEMENTED
+func _level_complete() -> void:
+	pass
 
 
 func _on_button_pressed() -> void:
