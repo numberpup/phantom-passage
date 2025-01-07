@@ -3,7 +3,7 @@ extends Node2D
 ##
 # EXPORTED VARIABLES
 ##
-@export var tile_size: int = 150
+@export var tile_size: int = 175
 @export var tile_padding: int = 40
 
 @export var active_color: Color = Color(.95, .85, .95)         # pink for active tiles

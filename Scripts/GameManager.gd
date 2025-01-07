@@ -28,8 +28,8 @@ var player_consumables = [] # Stores usable items.
 var player_upgrades = [] # Stores acquired and active Artifacts.
 
 # Board states and effects
-var board_size = 3
-var board_obstacle_count = 3
+var board_size = 4
+var board_obstacle_count = 5
 
 # Enemy state and effects
 var enemy_health_max = 100
