@@ -21,7 +21,7 @@ var upgrades: Dictionary = {
 # ------------------ ENEMIES -------------------- #
 const enemies: Dictionary = {
 	"nice_torso": {
-		"hp": 100,
+		"hp": 1000,
 		"atk": 10,
 		"sprite": "res://Assets/EnemySprites/NiceTorso.png",
 		"sprite_x_dim": 32,
@@ -35,7 +35,7 @@ const enemies: Dictionary = {
 		"name": "Nice Torso"
 	},
 		"funky_beetle": {
-		"hp": 100,
+		"hp": 1000,
 		"atk": 10,
 		"sprite": "res://Assets/EnemySprites/FunkyBeetle.png",
 		"sprite_x_dim": 64,

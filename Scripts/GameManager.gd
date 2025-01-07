@@ -19,8 +19,8 @@ var current_encounter = 1
 # Player stats (changes nearly every move / turn)
 var player_hp = 50
 var player_base_damage = 40
-var player_damage_mult = 1
-var player_damage = 40
+var player_damage_mult = 20
+var player_damage = player_base_damage*player_damage_mult
 
 # Friends, consumables, upgrades
 var player_party = [] # Stores Friends.

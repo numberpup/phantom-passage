@@ -1,8 +1,5 @@
 extends Control
 
-@export var max_health: int = 100
-@export var current_health: int = 100
-
 @onready var progress_bar = $HBoxContainer/ProgressBar
 
 func _ready() -> void:
@@ -12,10 +9,12 @@ func setup_health_bar() -> void:
 	# Set the initial values of the health bar
 	progress_bar.min_value = 0
 	progress_bar.max_value = GameManager.enemy_health_max
-	progress_bar.value = current_health
+	print(progress_bar.max_value)
+	progress_bar.value = GameManager.enemy_health
 
 func update_health() -> void:
 	# Update the progress bar with a bouncy animation
+	progress_bar.max_value = GameManager.enemy_health_max
 	var tween = get_tree().create_tween()
 	tween.tween_property($HBoxContainer/ProgressBar, "value", GameManager.enemy_health, .3).set_trans(Tween.TRANS_BACK)
 

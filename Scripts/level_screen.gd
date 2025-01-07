@@ -31,8 +31,12 @@ func connect_board_clear_signal() -> void:
 
 # Signal handler for updating the ScoreDisplay
 func _on_game_board_board_clear() -> void:
-	score += 1
-	score_display.text = str(score)
+	$DamageDisplay.visible_ratio = 0.0
+	$DamageDisplay.text = "[center]" + str(GameManager.player_damage)
+	var tween = get_tree().create_tween()
+	print($DamageDisplay.text.length())
+	tween.tween_property($DamageDisplay, "visible_ratio", 1, .1).set_trans(Tween.TRANS_BACK)
+	tween.tween_property($DamageDisplay, "visible_ratio", 0, .8).set_trans(Tween.TRANS_BACK)
 
 
 # Instantiates the enemy scene as a child of the EnemyContainer and centers it
@@ -42,11 +46,16 @@ func instantiate_enemy() -> void:
 	enemy_scene = preload("res://Scenes/Enemies/EnemyShell.tscn")
 	var enemy_instance = enemy_scene.instantiate()
 	
+	# Connect the updated_enemy_health signal so the infobar can be updated
+	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
+	
 	enemy_instance._setup(current_enemy, "enemy")
 	
 		# Center the enemy manually
 	var container_center = enemy_container.size / 2
 	enemy_instance.position = container_center
+	
+
 	
 	enemy_container.scale = Vector2(0, 0)
 	enemy_container.add_child(enemy_instance)
@@ -62,8 +71,7 @@ func instantiate_enemy() -> void:
 	# Connect the enemy_died signal to reinstantiate a new enemy
 	enemy_instance.connect("enemy_died", Callable(self, "_on_enemy_died"))
 	
-	# Connect the updated_enemy_health signal so the infobar can be updated
-	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
+
 	
 	# enemy has been instantiated, now it's the player's turn
 	is_player_turn = true

@@ -88,5 +88,20 @@ text = "0"
 [node name="InfoBar" parent="." instance=ExtResource("6_88dgy")]
 layout_mode = 1
 
+[node name="DamageDisplay" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -321.5
+offset_top = 142.0
+offset_right = 321.5
+offset_bottom = 234.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("3_6xjha")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]"
+
 [connection signal="board_clear" from="MarginContainer/GameBoard" to="." method="_on_game_board_board_clear"]
 [connection signal="turn_start" from="MarginContainer/GameBoard" to="." method="_on_player_turn_start"]

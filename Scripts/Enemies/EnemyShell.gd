@@ -52,9 +52,11 @@ func enemy_init(enemy: String) -> void:
 	attack_power = InfoTable.enemies[enemy]["atk"]
 	
 	# Update global enemy stats
-	GameManager.enemy_health_max = max_health
-	GameManager.enemy_health = health
+	GameManager.enemy_health_max = InfoTable.enemies[enemy]["hp"]
+	GameManager.enemy_health = InfoTable.enemies[enemy]["hp"]
 	GameManager.enemy_attack = attack_power
+	emit_signal("updated_enemy_health")
+	print("Inside enemy_init, enemyhealth: " + str(GameManager.enemy_health_max))
 	
 	
 	# Sprite info
