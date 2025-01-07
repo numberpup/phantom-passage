@@ -1,6 +1,64 @@
 extends Node
 
-
+var enemy_damage_multipliers = [
+	# empty
+	[],
+	# floor 1
+	[
+		# empty
+		[],
+		# encounter 1
+		1,
+		# encounter 2
+		2,
+		# encounter 3
+		3
+	],
+	# floor 2
+	[
+		# empty
+		[],
+		# encounter 1
+		4,
+		# encounter 2
+		5,
+		# encounter 3
+		6
+	],
+	# floor 3
+	[
+		# empty
+		[],
+		# encounter 1
+		7,
+		# encounter 2
+		8,
+		# encounter 3
+		9
+	],
+	# floor 4
+	[
+		# empty
+		[],
+		# encounter 1
+		10,
+		# encounter 2
+		11,
+		# encounter 3
+		12
+	],
+	# floor 5
+	[
+		# empty
+		[],
+		# encounter 1
+		13,
+		# encounter 2
+		14,
+		# encounter 3
+		15
+	]
+]
 
 var floors = [
 	#empty

@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr2aqp2bt5i5i"]
+
+[ext_resource type="FontFile" uid="uid://c4hsx53rjc3e8" path="res://Assets/NESCyrillic.ttf" id="1_7mhrf"]
+[ext_resource type="Script" path="res://Scripts/UI/progression_screen.gd" id="1_wj1ga"]
+[ext_resource type="PackedScene" uid="uid://csrr4nf3h47p8" path="res://Scripts/UI/SceneTransition.tscn" id="3_xtr6e"]
+
+[node name="ProgressionScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wj1ga")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1841.0
+offset_top = -555.0
+offset_right = 3059.0
+offset_bottom = 2621.0
+color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[node name="FloorLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -451.0
+offset_top = -360.0
+offset_right = 403.0
+offset_bottom = -251.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_7mhrf")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]FLOOR 1"
+fit_content = true
+
+[node name="LevelLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -451.0
+offset_top = -232.0
+offset_right = 403.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_7mhrf")
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[center]Level 1"
+fit_content = true
+
+[node name="SceneTransition" parent="." instance=ExtResource("3_xtr6e")]
