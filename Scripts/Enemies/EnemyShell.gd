@@ -82,11 +82,8 @@ func king_init(enemy: String) -> void:
 	pass
 
 func _ready() -> void:
-
 	# Set up the animation
 	setup_animation()
-	
-	
 	
 	# Emit signal indicating the global health was updated
 	emit_signal("updated_enemy_health")
@@ -94,15 +91,6 @@ func _ready() -> void:
 	# Force scale both on the root node and the AnimatedSprite2D
 	scale = Vector2(size_mult, size_mult)  # Scale the root node
 	animated_sprite.scale = Vector2(size_mult, size_mult)  # Scale the sprite further if needed
-
-#func setup_health_bar() -> void:
-	## Load and instance the HealthBar scene
-	#var health_bar = $LevelScreen/InfoBar/ProgressBar
-#
-	## Initialize the health bar values
-	#health_bar.max_health = max_health
-	#health_bar.current_health = health
-	#health_bar.setup_health_bar()
 
 
 func take_damage(amount: int) -> void:
@@ -160,20 +148,6 @@ func setup_animation() -> void:
 	animated_sprite.speed_scale = speed_mult
 	animated_sprite.scale = Vector2(size_mult, size_mult)  # Scale up for visibility
 
-#func update_health_bar() -> void:
-	#if health_bar:
-		#print("Animating health bar to:", health)
-#
-		## Create a tween to smoothly animate the health bar value
-		#var tween = create_tween()
-		#tween.tween_property(
-			#health_bar.progress_bar,  # Tween the ProgressBar node
-			#"value",  # Animate the `value` property
-			#health,  # Target value
-			#0.3  # Duration in seconds
-		#).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
-
 # Signal handler for `board_clear`
 func _on_game_board_board_clear() -> void:
 	print("Board clear signal received by EnemyShell.")
@@ -184,4 +158,9 @@ func _on_game_board_board_clear() -> void:
 func die() -> void:
 	print("Enemy has been defeated.")
 	emit_signal("enemy_died")  # Notify LevelScreen
+	
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property($AnimatedSprite2D, "scale", Vector2(0,0), .2).set_ease(Tween.EASE_IN)
+	await get_tree().create_timer(.2).timeout
 	queue_free()

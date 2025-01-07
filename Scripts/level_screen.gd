@@ -44,12 +44,15 @@ func instantiate_enemy() -> void:
 	else:
 		enemy_instance._setup("nice_torso", "enemy")
 	
-	enemy_container.add_child(enemy_instance)
-
-	# Center the enemy manually
+		# Center the enemy manually
 	var container_center = enemy_container.size / 2
 	enemy_instance.position = container_center
-		
+	
+	enemy_container.rotation_degrees = 10
+	enemy_container.add_child(enemy_instance)
+	var tween = get_tree().create_tween()
+	tween.tween_property(enemy_container, "rotation_degrees", 0, .2).set_trans(Tween.TRANS_BACK)
+	
 	#enemy_instance.modulate = get_random_tint()
 
 	# Connect the GameBoard's `board_clear` signal to the enemy's `_on_game_board_board_clear` method
