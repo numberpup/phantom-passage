@@ -3,7 +3,7 @@ extends Node2D
 ##
 # EXPORTED VARIABLES
 ##
-@export var tile_size: int = 175
+@export var tile_size: int = 150
 @export var tile_padding: int = 40
 
 @export var active_color: Color = Color(.95, .85, .95)         # pink for active tiles
@@ -66,6 +66,13 @@ func reset_board() -> void:
 	create_grid_from_model(board_model)
 
 func _ready() -> void:
+	if GameManager.board_size == 3:
+		tile_size = 170
+	if GameManager.board_size == 4:
+		tile_size = 160
+	if GameManager.board_size == 5:
+		tile_size = 140
+	
 	reset_board()
 
 	# Ensure this node can receive input events
