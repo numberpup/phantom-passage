@@ -48,10 +48,10 @@ func instantiate_enemy() -> void:
 	var container_center = enemy_container.size / 2
 	enemy_instance.position = container_center
 	
-	enemy_container.rotation_degrees = 10
+	enemy_container.scale = Vector2(0, 0)
 	enemy_container.add_child(enemy_instance)
 	var tween = get_tree().create_tween()
-	tween.tween_property(enemy_container, "rotation_degrees", 0, .2).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(enemy_container, "scale", Vector2(1,1), .1).set_trans(Tween.TRANS_BACK)
 	
 	#enemy_instance.modulate = get_random_tint()
 

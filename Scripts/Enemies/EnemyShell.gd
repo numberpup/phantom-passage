@@ -157,10 +157,12 @@ func _on_game_board_board_clear() -> void:
 # Handles enemy death
 func die() -> void:
 	print("Enemy has been defeated.")
-	emit_signal("enemy_died")  # Notify LevelScreen
 	
-	
+
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, "scale", Vector2(0,0), .2).set_ease(Tween.EASE_IN)
+	await get_tree().create_timer(.1).timeout
+	emit_signal("enemy_died")  # Notify LevelScreen
+	emit_signal("updated_enemy_health")
 	await get_tree().create_timer(.2).timeout
 	queue_free()
