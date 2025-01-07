@@ -25,6 +25,7 @@ extends Node2D
 ##
 signal board_clear
 signal board_fail
+signal turn_start
 
 ##
 # Import script to generate new boards
@@ -53,6 +54,10 @@ var last_tile_touched: Node2D = null
 
 # Whether the board is interactable
 var board_interactable: bool = true
+
+# function triggers when turn_end signal is recieved by board
+func _turn_end() -> void:
+	pass
 
 func reset_board() -> void:
 	var generator = BoardGenerator.new()
