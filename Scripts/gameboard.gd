@@ -83,16 +83,27 @@ func _ready() -> void:
 # CENTER THE BOARD IF THE PARENT IS A CONTROL
 ##
 func _center_board_if_needed() -> void:
+	var parent_size: Vector2
+
+	# Determine the size of the parent node or fallback to viewport size
 	var parent_node = get_parent()
 	if parent_node is Control:
-		var parent_size: Vector2 = parent_node.get_rect().size
-		var row_count = board_model.size()
-		var col_count = board_model[0].size()
+		parent_size = parent_node.get_rect().size
+	else:
+		parent_size = get_viewport_rect().size
 
-		var total_width: float = float(col_count) * float(tile_size + tile_padding)
-		var total_height: float = float(row_count) * float(tile_size + tile_padding)
+	# Calculate the total board dimensions
+	var row_count = board_model.size()
+	var col_count = board_model[0].size()
 
-		position = ((parent_size - Vector2(total_width, total_height)) / 2).floor()
+	# Total width and height of the board, including padding between tiles
+	var total_width: float = (col_count * tile_size) + ((col_count - 1) * tile_padding)
+	var total_height: float = (row_count * tile_size) + ((row_count - 1) * tile_padding)
+	# Calculate the position to center the board
+	position = ((parent_size - Vector2(total_width, total_height)) / 2).floor()
+
+
+
 
 
 ##
