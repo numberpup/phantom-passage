@@ -6,9 +6,15 @@ extends Control
 @onready var enemy_container = $EnemyContainer
 @onready var game_board = $MarginContainer/GameBoard  # Corrected path to GameBoard
 
+var encounter_table
+var current_enemy
+var current_encounter = 0
+
 var is_player_turn = true
 
 func _ready() -> void:
+	encounter_table = preload("res://Scripts/DataProcessors/EncounterTable.gd").new()
+	progress_encounter()
 	$SceneTransition/ColorRect.color.a = 255
 	$SceneTransition/AnimationPlayer.play("fade_out")
 
@@ -16,10 +22,6 @@ func _ready() -> void:
 	connect_board_clear_signal()  # Connect the board clear signal
 	
 	instantiate_enemy()
-	
-	#$GameBoard.connect("turn_start", Callable(self, "_on_player_turn_start"))
-	
-
 
 # Connect `board_clear` to all relevant methods
 func connect_board_clear_signal() -> void:
@@ -40,14 +42,7 @@ func instantiate_enemy() -> void:
 	enemy_scene = preload("res://Scenes/Enemies/EnemyShell.tscn")
 	var enemy_instance = enemy_scene.instantiate()
 	
-	if randi() % (4) == 0:  # Randomly choose an enemy
-		enemy_instance._setup("red_guy", "enemy")
-	elif randi() % (4) == 1:
-		enemy_instance._setup("suspicious_balloon", "enemy")
-	elif randi() % (4) == 2:
-		enemy_instance._setup("funky_beetle", "enemy")
-	else:
-		enemy_instance._setup("nice_torso", "enemy")
+	enemy_instance._setup(current_enemy, "enemy")
 	
 		# Center the enemy manually
 	var container_center = enemy_container.size / 2
@@ -76,6 +71,7 @@ func instantiate_enemy() -> void:
 # Signal handler for enemy death
 func _on_enemy_died() -> void:
 	print("Enemy died. Instantiating a new one...")
+	progress_encounter()
 	instantiate_enemy()
 
 
@@ -107,6 +103,13 @@ func _player_takes_damage() -> void:
 	GameManager.player_health -= GameManager.enemy_attack
 	var infoBar = $InfoBar
 	infoBar.update_player_health()
+
+func progress_encounter() -> void:
+	current_encounter = current_encounter + 1
+	if current_encounter > 4:
+		current_encounter = 1
+	current_enemy = encounter_table.floors[1][1][current_encounter]
+	print (current_enemy)
 
 # WILL POPULATE ONCE LEVELS AND PROGRESSION ARE IMPLEMENTED
 func _level_complete() -> void:
