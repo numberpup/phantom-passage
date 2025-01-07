@@ -49,7 +49,7 @@ const enemies: Dictionary = {
 		"name": "Funky Beetle"
 	},
 		"suspicious_balloon": {
-		"hp": 100,
+		"hp": 1601,
 		"atk": 10,
 		"sprite": "res://Assets/EnemySprites/SuspiciousBalloon.png",
 		"sprite_x_dim": 32,

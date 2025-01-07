@@ -20,7 +20,7 @@ var current_encounter = 1
 var player_hp = 50
 var player_base_damage = 40
 var player_damage_mult = 20
-var player_damage = player_base_damage*player_damage_mult
+var player_damage
 
 # Friends, consumables, upgrades
 var player_party = [] # Stores Friends.
@@ -50,4 +50,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	player_damage = player_base_damage * player_damage_mult

@@ -41,12 +41,12 @@ func _on_7_obs_button_pressed() -> void:
 
 
 func _on_10_dmg_button_pressed() -> void:
-	GameManager.player_damage = 10
+	GameManager.player_base_damage = 10
 
 
 func _on_40_dmg_button_pressed() -> void:
-	GameManager.player_damage = 40
+	GameManager.player_base_damage = 40
 
 
 func _on_80_dmg_button_pressed() -> void:
-	GameManager.player_damage = 80
+	GameManager.player_base_damage = 80
