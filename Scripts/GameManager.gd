@@ -24,9 +24,9 @@ var player_damage_mult = 1
 var player_damage
 
 # Friends, consumables, upgrades
-var player_party = [] # Stores Friends.
+var player_emblems = [] # Stores emblems.
 var player_consumables = [] # Stores usable items.
-var player_upgrades = [] # Stores acquired and active Artifacts.
+var player_artifacts = [] # Stores acquired and active Artifacts.
 
 # Board states and effects
 var board_size = 4

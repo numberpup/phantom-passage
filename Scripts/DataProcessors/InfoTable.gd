@@ -4,7 +4,7 @@ extends Node
 # ----------------------------------------------- #
 
 # ------------------ FRIENDS ------------------- #
-var friends: Dictionary = {
+var emblems: Dictionary = {
 	
 }
 
@@ -14,7 +14,7 @@ var consumables: Dictionary = {
 }
 
 # ------------------ UPGRADES ------------------- #
-var upgrades: Dictionary = {
+var artifacts: Dictionary = {
 	
 }
 
@@ -22,7 +22,7 @@ var upgrades: Dictionary = {
 const enemies: Dictionary = {
 	"nice_torso": {
 		"hp": 100,
-		"atk": 80,
+		"atk": 10,
 		"sprite": "res://Assets/EnemySprites/NiceTorso.png",
 		"sprite_x_dim": 32,
 		"sprite_y_dim": 32,
@@ -36,7 +36,7 @@ const enemies: Dictionary = {
 	},
 		"funky_beetle": {
 		"hp": 100,
-		"atk": 40,
+		"atk": 10,
 		"sprite": "res://Assets/EnemySprites/FunkyBeetle.png",
 		"sprite_x_dim": 64,
 		"sprite_y_dim": 96,
@@ -50,7 +50,7 @@ const enemies: Dictionary = {
 	},
 		"suspicious_balloon": {
 		"hp": 100,
-		"atk": 20,
+		"atk": 10,
 		"sprite": "res://Assets/EnemySprites/SuspiciousBalloon.png",
 		"sprite_x_dim": 32,
 		"sprite_y_dim": 32,
@@ -64,7 +64,7 @@ const enemies: Dictionary = {
 	},
 		"red_guy": {
 		"hp": 100,
-		"atk": 30,
+		"atk": 10,
 		"sprite": "res://Assets/EnemySprites/RedGuy.png",
 		"sprite_x_dim": 32,
 		"sprite_y_dim": 64,
