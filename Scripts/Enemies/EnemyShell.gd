@@ -24,6 +24,7 @@ var health_bar
 # Signals
 signal enemy_died
 signal updated_enemy_health
+signal enemy_attack
 
 # INITIALIZATION INSTRUCTIONS:
 # TO USE: CALL _setup(enemy_key, enemy_type)
@@ -117,9 +118,12 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		health = 0
 		die()
+	else:
+		emit_signal("enemy_attack") # enemy take turn
 		
 	# CALL AN updated_enemy_health SIGNAL
-	emit_signal("updated_enemy_health")
+	if not GameManager.player_hp <= 100:
+		emit_signal("updated_enemy_health")
 
 func attack_animation() -> void:
 	var sprite_frames = SpriteFrames.new()

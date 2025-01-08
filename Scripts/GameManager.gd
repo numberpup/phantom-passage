@@ -17,9 +17,10 @@ var current_level = 1
 var current_encounter = 1
 
 # Player stats (changes nearly every move / turn)
-var player_hp = 50
+var player_hp = 100
+var player_hp_max = 100
 var player_base_damage = 40
-var player_damage_mult = 20
+var player_damage_mult = 1
 var player_damage
 
 # Friends, consumables, upgrades
@@ -43,6 +44,17 @@ var enemy_effects = []
 # ----------------- #
 # --- Functions --- #
 # ----------------- #
+
+func reset():
+	board_size = 4
+	board_obstacle_count = 5
+	player_base_damage = 40
+	player_damage_mult = 1
+	player_hp_max = 100
+	player_hp = 100
+	current_floor = 1
+	current_level = 1
+	current_encounter = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

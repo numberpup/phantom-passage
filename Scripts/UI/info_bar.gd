@@ -27,7 +27,7 @@ func setup_player_health_bar() -> void:
 func update_player_health() -> void:
 	# Update the progress bar with a bouncy animation
 	var tween = get_tree().create_tween()
-	tween.tween_property($HBoxContainer/ProgressBar, "value", GameManager.enemy_health, 1).set_trans(Tween.TRANS_BACK)
+	tween.tween_property($HBoxContainer2/ProgressBar2, "value", GameManager.player_hp, .3).set_trans(Tween.TRANS_BACK)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -17,7 +17,7 @@ func _ready() -> void:
 	progress_encounter()
 	$SceneTransition/ColorRect.color.a = 255
 	$SceneTransition/AnimationPlayer.play("fade_out")
-
+	$InfoBar.update_player_health()
 	score_display.text = str(score)
 	connect_board_clear_signal()  # Connect the board clear signal
 	
@@ -49,6 +49,9 @@ func instantiate_enemy() -> void:
 	# Connect the updated_enemy_health signal so the infobar can be updated
 	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
 	
+	# connect the "enemy_attack" signal so enemy can take turns after we clear a gameboard
+	enemy_instance.connect("enemy_attack", Callable(self, "_player_takes_damage"))
+
 	enemy_instance._setup(current_enemy, "enemy")
 	
 		# Center the enemy manually
@@ -108,9 +111,19 @@ func get_random_tint(base_color: Color = Color(1, 1, 1)) -> Color:
 
 
 func _player_takes_damage() -> void:
-	GameManager.player_health -= GameManager.enemy_attack
+	print("Player takes damage inside levelscreen")
+	GameManager.player_hp -= GameManager.enemy_attack
+	var board_container = $MarginContainer 
 	var infoBar = $InfoBar
 	infoBar.update_player_health()
+	
+	if GameManager.player_hp <= 0:
+		player_dies()
+
+func player_dies():
+	print("player die")
+	GameManager.reset()
+	get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 
 func progress_encounter() -> void:
 	current_encounter = current_encounter + 1
