@@ -22,7 +22,7 @@ var upgrades: Dictionary = {
 const enemies: Dictionary = {
 	"nice_torso": {
 		"hp": 100,
-		"atk": 10,
+		"atk": 80,
 		"sprite": "res://Assets/EnemySprites/NiceTorso.png",
 		"sprite_x_dim": 32,
 		"sprite_y_dim": 32,

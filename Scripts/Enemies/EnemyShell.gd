@@ -122,7 +122,7 @@ func take_damage(amount: int) -> void:
 		emit_signal("enemy_attack") # enemy take turn
 		
 	# CALL AN updated_enemy_health SIGNAL
-	if not GameManager.player_hp <= 100:
+	if not GameManager.player_hp <= 0:
 		emit_signal("updated_enemy_health")
 
 func attack_animation() -> void:
