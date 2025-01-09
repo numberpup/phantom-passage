@@ -113,6 +113,7 @@ text = "0"
 
 [node name="InfoBar" parent="." instance=ExtResource("6_88dgy")]
 layout_mode = 1
+offset_bottom = -1632.0
 
 [node name="DamageDisplay" type="RichTextLabel" parent="."]
 layout_mode = 1

@@ -10,7 +10,7 @@ var encounter_table
 var current_enemy
 var current_encounter = 0
 signal enemy_turn
-
+signal trigger_enemy_attack_animation
 var is_player_turn = true
 
 func _ready() -> void:
@@ -54,8 +54,9 @@ func instantiate_enemy() -> void:
 	# Connect the updated_enemy_health signal so the infobar can be updated
 	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
 	
-	# connect the "enemy_turn" signal to both gameboard
+	# connect the "enemy_turn" signal to gameboard
 	self.connect("enemy_turn", Callable($MarginContainer/GameBoard, "_on_enemy_turn"))
+	
 
 	enemy_instance._setup(current_enemy, "enemy")
 	
@@ -125,13 +126,27 @@ func get_random_tint(base_color: Color = Color(1, 1, 1)) -> Color:
 
 	return Color(new_red, new_green, new_blue)
 
+func perform_enemy_attack_animation() -> void:
+	var original_pos = $EnemyContainer.position
+	var enemy_pos_y = $EnemyContainer.position.y
+	var gameboard_pos_y = $MarginContainer.position.y
+	
+	var distance_to_move = gameboard_pos_y - enemy_pos_y - ($EnemyContainer.size.x/2)
+	print("enemy_pos_y= " + str(enemy_pos_y))
+	print("gameboard_pos_y= " + str(gameboard_pos_y))
+	var tween = get_tree().create_tween()
+	tween.tween_property($EnemyContainer, "position", Vector2($EnemyContainer.position.x, $EnemyContainer.position.y + distance_to_move), .04).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property($EnemyContainer, "position", original_pos, .15).set_trans(Tween.TRANS_BOUNCE)
+	pass
 
 func _player_takes_damage() -> void:
 	print("Player takes damage inside levelscreen")
 	GameManager.player_hp -= GameManager.enemy_attack
 	var board_container = $MarginContainer 
 	var infoBar = $InfoBar
+	perform_enemy_attack_animation()
 	infoBar.update_player_health()
+	
 	
 	if GameManager.player_hp <= 0:
 		player_dies()
