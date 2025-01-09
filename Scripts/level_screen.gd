@@ -88,6 +88,8 @@ func instantiate_enemy() -> void:
 # Signal handler for enemy death
 func _on_enemy_died() -> void:
 	print("Enemy died. Instantiating a new one...")
+	$TimerContainer/Timer.stop()
+	$TimerContainer.visible = false
 	progress_encounter()
 	instantiate_enemy()
 
