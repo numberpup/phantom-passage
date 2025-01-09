@@ -36,7 +36,7 @@ const enemies: Dictionary = {
 	},
 		"funky_beetle": {
 		"hp": 100,
-		"atk": 10,
+		"atk": 40,
 		"sprite": "res://Assets/EnemySprites/FunkyBeetle.png",
 		"sprite_x_dim": 64,
 		"sprite_y_dim": 96,
@@ -50,7 +50,7 @@ const enemies: Dictionary = {
 	},
 		"suspicious_balloon": {
 		"hp": 100,
-		"atk": 10,
+		"atk": 40,
 		"sprite": "res://Assets/EnemySprites/SuspiciousBalloon.png",
 		"sprite_x_dim": 32,
 		"sprite_y_dim": 32,
@@ -64,7 +64,7 @@ const enemies: Dictionary = {
 	},
 		"red_guy": {
 		"hp": 100,
-		"atk": 10,
+		"atk": 40,
 		"sprite": "res://Assets/EnemySprites/RedGuy.png",
 		"sprite_x_dim": 32,
 		"sprite_y_dim": 64,
