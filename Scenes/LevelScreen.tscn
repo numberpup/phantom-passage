@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfsssk8hlmral"]
+[gd_scene load_steps=12 format=3 uid="uid://dfsssk8hlmral"]
 
 [ext_resource type="Texture2D" uid="uid://i0gii2epgm70" path="res://Assets/spookyhallway.png" id="1_5jgay"]
 [ext_resource type="Script" path="res://Scripts/level_screen.gd" id="1_w7rh0"]
@@ -6,6 +6,11 @@
 [ext_resource type="FontFile" uid="uid://c4hsx53rjc3e8" path="res://Assets/NESCyrillic.ttf" id="3_6xjha"]
 [ext_resource type="PackedScene" uid="uid://csrr4nf3h47p8" path="res://Scripts/UI/SceneTransition.tscn" id="5_d1jak"]
 [ext_resource type="PackedScene" uid="uid://cykd3ju2vtadc" path="res://Scenes/UI/InfoBar.tscn" id="6_88dgy"]
+[ext_resource type="Texture2D" uid="uid://qyfrknlnfr18" path="res://Assets/BrickSprites/RedBrick.png" id="7_c8vjq"]
+[ext_resource type="Script" path="res://Scripts/UI/emblem_container.gd" id="7_u0al2"]
+[ext_resource type="Texture2D" uid="uid://bsj2v55640bd2" path="res://Assets/BrickSprites/GreenBrick.png" id="8_d7vwn"]
+[ext_resource type="Texture2D" uid="uid://rthe4n0e874y" path="res://Assets/BrickSprites/OrangeBrick.png" id="9_ku3ex"]
+[ext_resource type="Texture2D" uid="uid://df1m32x7nr8c1" path="res://Assets/BrickSprites/PinkBrick.png" id="10_0ha8l"]
 
 [node name="LevelScreen" type="Control"]
 layout_mode = 3
@@ -129,6 +134,48 @@ theme_override_fonts/normal_font = ExtResource("3_6xjha")
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[center]"
+
+[node name="EmblemContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 700)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 32.0
+offset_top = 326.0
+offset_right = 132.0
+offset_bottom = 1056.0
+theme_override_constants/separation = 25
+alignment = 1
+script = ExtResource("7_u0al2")
+
+[node name="TextureRect" type="TextureRect" parent="EmblemContainer"]
+layout_mode = 2
+texture = ExtResource("7_c8vjq")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="EmblemContainer"]
+layout_mode = 2
+texture = ExtResource("8_d7vwn")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="EmblemContainer"]
+layout_mode = 2
+texture = ExtResource("9_ku3ex")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="EmblemContainer"]
+layout_mode = 2
+texture = ExtResource("10_0ha8l")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="TextureRect5" type="TextureRect" parent="EmblemContainer"]
+layout_mode = 2
+texture = ExtResource("7_c8vjq")
+expand_mode = 4
+stretch_mode = 4
 
 [connection signal="enemy_turn" from="." to="MarginContainer/GameBoard" method="_on_enemy_turn"]
 [connection signal="timeout" from="TimerContainer/Timer" to="." method="_on_timer_end"]

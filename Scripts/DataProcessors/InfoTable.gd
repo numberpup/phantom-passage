@@ -5,7 +5,11 @@ extends Node
 
 # ------------------ FRIENDS ------------------- #
 var emblems: Dictionary = {
-	
+	"green_brick": {
+		"description": "Adds 10 to base player damage.",
+		"sprite": "res://Assets/BrickSprites/GreenBrick.png",
+		"script": "res://Scripts/Emblems/green_brick.gd"
+	}
 }
 
 # ---------------- CONSUMABLES ------------------ #
