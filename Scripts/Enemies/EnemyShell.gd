@@ -207,11 +207,6 @@ func _on_game_board_board_clear() -> void:
 	print("Board clear signal received by EnemyShell.")
 	take_damage(GameManager.player_damage)  # Example damage value
 
-func _on_enemy_turn() -> void:
-	print("ON ENEMY TURN SIGNAL RECEIVED FROM LEVELSCREEN")
-	emit_signal("enemy_attack") # enemy take attack turn
-
-
 # Handles enemy death
 func die() -> void:
 	print("Enemy has been defeated.")

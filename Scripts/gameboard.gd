@@ -28,6 +28,7 @@ extends Node2D
 signal board_clear
 signal board_fail
 signal turn_start
+signal enemy_attack
 
 ##
 # Import script to generate new boards
@@ -301,10 +302,14 @@ func get_tile_at_position(pos: Vector2) -> Node2D:
 
 func attack_animation() -> void:
 	var original_mod = self.modulate
+	var original_pos = self.position
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate", Color(0, 0, 0), .2)
-	tween.tween_property(self, "modulate", original_mod, .2)
+	tween.tween_property(self, "modulate", Color(.91, .71, .48), .05)
+	tween.tween_property(self, "position", Vector2(self.position.x, self.position.y+50), .05).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "position", original_pos, .15).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "modulate", original_mod, .5)
+
 	enable_board_interaction()
 
 
@@ -326,4 +331,7 @@ func _on_enemy_turn() -> void:
 		# Wait for fail handling to finish
 		await _check_board_status()
 	disable_board_interaction()
-	attack_animation()
+	if GameManager.enemy_health > 0:
+		attack_animation()
+		emit_signal("enemy_attack")
+	enable_board_interaction()

@@ -23,6 +23,9 @@ func _ready() -> void:
 	score_display.text = str(score)
 	connect_board_clear_signal()  # Connect the board clear signal
 	
+	#connect signal from gameboard that enemy turn has triggered damage
+	game_board.connect("enemy_attack", Callable(self, "_player_takes_damage"))
+	
 	instantiate_enemy()
 
 # Connect `board_clear` to all relevant methods
@@ -51,11 +54,7 @@ func instantiate_enemy() -> void:
 	# Connect the updated_enemy_health signal so the infobar can be updated
 	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
 	
-	# connect the "enemy_attack" signal so enemy can damage player
-	enemy_instance.connect("enemy_attack", Callable(self, "_player_takes_damage"))
-	
-	# connect the "enemy_turn" signal to both enemyshell and gameboard
-	self.connect("enemy_turn", Callable(enemy_instance, "_on_enemy_turn"))
+	# connect the "enemy_turn" signal to both gameboard
 	self.connect("enemy_turn", Callable($MarginContainer/GameBoard, "_on_enemy_turn"))
 
 	enemy_instance._setup(current_enemy, "enemy")
