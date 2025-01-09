@@ -146,13 +146,16 @@ func _player_takes_damage() -> void:
 	var infoBar = $InfoBar
 	perform_enemy_attack_animation()
 	infoBar.update_player_health()
-	
-	
 	if GameManager.player_hp <= 0:
 		player_dies()
 
 func player_dies():
 	print("player die")
+	var tween = get_tree().create_tween()
+	tween.tween_property($MarginContainer, "rotation", -1, 1)
+	tween.parallel().tween_property($MarginContainer, "scale", Vector2(0,0), 1)
+	tween.parallel().tween_property($MarginContainer, "position", Vector2(self.size.x/2,2000), 1)
+	await get_tree().create_timer(1).timeout
 	GameManager.reset()
 	get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 
