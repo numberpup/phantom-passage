@@ -94,7 +94,7 @@ func _on_enemy_died() -> void:
 	instantiate_enemy()
 
 func on_timer_change() -> void:
-	$TimerContainer/TimerLabel.text = str(ceil($TimerContainer/Timer.time_left))
+	$TimerContainer/TimerLabel.text = "[center]" + str(ceil($TimerContainer/Timer.time_left))
 
 func _on_player_turn_start() -> void:
 	print("player turn start called")
