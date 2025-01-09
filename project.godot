@@ -20,6 +20,7 @@ run/show_image=true
 [autoload]
 
 GameManager="*res://Scripts/GameManager.gd"
+EffectsManager="*res://Scripts/DataProcessors/EffectsManager.gd"
 
 [display]
 
