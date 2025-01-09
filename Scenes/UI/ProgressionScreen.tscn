@@ -15,10 +15,10 @@ script = ExtResource("1_wj1ga")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = -1841.0
-offset_top = -555.0
-offset_right = 3059.0
-offset_bottom = 2621.0
+offset_left = -2878.0
+offset_top = -1377.0
+offset_right = 4302.0
+offset_bottom = 3439.0
 color = Color(0.10748, 0.10748, 0.10748, 1)
 
 [node name="FloorLabel" type="RichTextLabel" parent="."]

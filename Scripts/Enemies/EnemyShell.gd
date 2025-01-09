@@ -93,6 +93,8 @@ func _ready() -> void:
 	# Emit signal indicating the global health was updated
 	emit_signal("updated_enemy_health")
 	
+	
+	
 	# Force scale both on the root node and the AnimatedSprite2D
 	scale = Vector2(size_mult, size_mult)  # Scale the root node
 	animated_sprite.scale = Vector2(size_mult, size_mult)  # Scale the sprite further if needed
@@ -118,8 +120,8 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		health = 0
 		die()
-	else:
-		emit_signal("enemy_attack") # enemy take turn
+	#else:
+		#emit_signal("enemy_attack") # enemy take turn
 		
 	# CALL AN updated_enemy_health SIGNAL
 	if not GameManager.player_hp <= 0:
@@ -204,6 +206,10 @@ func setup_animation() -> void:
 func _on_game_board_board_clear() -> void:
 	print("Board clear signal received by EnemyShell.")
 	take_damage(GameManager.player_damage)  # Example damage value
+
+func _on_enemy_turn() -> void:
+	print("ON ENEMY TURN SIGNAL RECEIVED FROM LEVELSCREEN")
+	emit_signal("enemy_attack") # enemy take attack turn
 
 
 # Handles enemy death

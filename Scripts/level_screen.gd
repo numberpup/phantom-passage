@@ -9,12 +9,14 @@ extends Control
 var encounter_table
 var current_enemy
 var current_encounter = 0
+signal enemy_turn
 
 var is_player_turn = true
 
 func _ready() -> void:
 	encounter_table = preload("res://Scripts/DataProcessors/EncounterTable.gd").new()
 	progress_encounter()
+	$TimerContainer.visible = false
 	$SceneTransition/ColorRect.color.a = 255
 	$SceneTransition/AnimationPlayer.play("fade_out")
 	$InfoBar.update_player_health()
@@ -49,8 +51,12 @@ func instantiate_enemy() -> void:
 	# Connect the updated_enemy_health signal so the infobar can be updated
 	enemy_instance.connect("updated_enemy_health", Callable(self, "_on_enemy_health_updated"))
 	
-	# connect the "enemy_attack" signal so enemy can take turns after we clear a gameboard
+	# connect the "enemy_attack" signal so enemy can damage player
 	enemy_instance.connect("enemy_attack", Callable(self, "_player_takes_damage"))
+	
+	# connect the "enemy_turn" signal to both enemyshell and gameboard
+	self.connect("enemy_turn", Callable(enemy_instance, "_on_enemy_turn"))
+	self.connect("enemy_turn", Callable($MarginContainer/GameBoard, "_on_enemy_turn"))
 
 	enemy_instance._setup(current_enemy, "enemy")
 	
@@ -85,10 +91,19 @@ func _on_enemy_died() -> void:
 	progress_encounter()
 	instantiate_enemy()
 
+func on_timer_change() -> void:
+	$TimerContainer/TimerLabel.text = str(ceil($TimerContainer/Timer.time_left))
 
 func _on_player_turn_start() -> void:
 	print("player turn start called")
-	pass
+	if $TimerContainer/Timer.is_stopped() == true:
+		$TimerContainer.visible = true
+		$TimerContainer/Timer.start()
+
+func _on_timer_end() -> void:
+	$TimerContainer.visible = false
+	emit_signal("enemy_turn")
+	
 
 # Signal handler for enemy health update
 func _on_enemy_health_updated() -> void:
@@ -144,3 +159,6 @@ func _on_button_pressed() -> void:
 
 func _on_button_2_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/UI/DebugShopScreen.tscn")
+
+func _process(delta: float) -> void:
+	on_timer_change()

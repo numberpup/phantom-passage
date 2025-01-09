@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var attack_sprite = $AnimatedSprite2D
+
 ##
 # EXPORTED VARIABLES
 ##
@@ -297,6 +299,15 @@ func get_tile_at_position(pos: Vector2) -> Node2D:
 			return tile
 	return null
 
+func attack_animation() -> void:
+	var original_mod = self.modulate
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate", Color(0, 0, 0), .2)
+	tween.tween_property(self, "modulate", original_mod, .2)
+	enable_board_interaction()
+
+
 ##
 # Enable and disable board interaction
 ##
@@ -305,3 +316,14 @@ func disable_board_interaction():
 
 func enable_board_interaction():
 	board_interactable = true
+
+
+func _on_enemy_turn() -> void:
+	print("INSIDE ENEMY TURN ON GAMEBOARD")
+	if dragging:
+		# End dragging immediately and trigger fail
+		dragging = false
+		# Wait for fail handling to finish
+		await _check_board_status()
+	disable_board_interaction()
+	attack_animation()

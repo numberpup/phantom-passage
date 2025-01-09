@@ -14,3 +14,5 @@ min_board_size = 3
 max_board_size = 5
 min_obstacle_count = 2
 max_obstacle_count = 7
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
