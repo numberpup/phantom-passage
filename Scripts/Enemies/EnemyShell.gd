@@ -205,7 +205,7 @@ func setup_animation() -> void:
 # Signal handler for `board_clear`
 func _on_game_board_board_clear() -> void:
 	print("Board clear signal received by EnemyShell.")
-	take_damage(GameManager.player_damage)  # Example damage value
+	take_damage(GameManager.effective_player_damage)  # Example damage value
 
 # Handles enemy death
 func die() -> void:

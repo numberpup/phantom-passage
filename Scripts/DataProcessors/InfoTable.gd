@@ -8,7 +8,20 @@ var emblems: Dictionary = {
 	"green_brick": {
 		"description": "Adds 10 to base player damage.",
 		"sprite": "res://Assets/BrickSprites/GreenBrick.png",
-		"script": "res://Scripts/Emblems/green_brick.gd"
+		"effect": "damage_10",
+		"display_name": "Green Brick"
+	},
+	"red_brick": {
+		"description": "Adds 4 to base damage multiplier.",
+		"sprite": "res://Assets/BrickSprites/RedBrick.png",
+		"effect": "mult_4",
+		"display_name": "Red Brick"
+	},
+	"fluffy_cat": {
+		"description": "Adds 20 to base player damage.",
+		"sprite": "res://Assets/EmblemSprites/FluffyCat.png",
+		"effect": "damage_20",
+		"display_name": "Fluffy Cat"
 	}
 }
 

@@ -21,11 +21,22 @@ var player_hp = 100
 var player_hp_max = 100
 var player_base_damage = 40
 var player_damage_mult = 1
-var player_damage
+var effective_player_damage = 40
 
-# Friends, consumables, upgrades
-var player_emblems = [] # Stores emblems.
+# placeholder
+#var player_damage = 40
+
+# Emblems, consumables, artifacts
+
+# Stores emblems.
+var player_emblems = [
+	"green_brick",
+	"red_brick",
+	"fluffy_cat"
+]
+
 var player_consumables = [] # Stores usable items.
+
 var player_artifacts = [] # Stores acquired and active Artifacts.
 
 # Board states and effects
@@ -62,4 +73,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	player_damage = player_base_damage * player_damage_mult
+	pass

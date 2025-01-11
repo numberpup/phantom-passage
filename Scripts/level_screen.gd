@@ -34,10 +34,10 @@ func connect_board_clear_signal() -> void:
 		# Connect the signal to update the score display
 		game_board.connect("board_clear", Callable(self, "_on_game_board_board_clear"))
 
-# Signal handler for updating the ScoreDisplay
+# When board clears, send some signals 
 func _on_game_board_board_clear() -> void:
 	$DamageDisplay.visible_ratio = 0.0
-	$DamageDisplay.text = "[center]" + str(GameManager.player_damage)
+	$DamageDisplay.text = "[center]" + str(GameManager.effective_player_damage)
 	var tween = get_tree().create_tween()
 	print($DamageDisplay.text.length())
 	tween.tween_property($DamageDisplay, "visible_ratio", 1, .1).set_trans(Tween.TRANS_BACK)
