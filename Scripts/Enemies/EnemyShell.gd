@@ -31,7 +31,7 @@ signal enemy_attack
 # DO THIS BEFORE CALLING add_child
 # THEREFORE THE DATA WILL BE THERE BEFORE _ready IS CALLED
 
-var enemy_floor_multipliers = [1, 1, 2, 4, 10, 20]
+var enemy_floor_multipliers = [1, 1, 10, 20, 500, 100]
 
 func _setup(enemy: String, enemy_type: String) -> void:
 	InfoTable = preload("res://Scripts/DataProcessors/InfoTable.gd").new()

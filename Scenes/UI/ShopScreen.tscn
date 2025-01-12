@@ -80,6 +80,6 @@ grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("2_drn0p")
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
-text = "[center]Select an item..."
+text = "[center]Select an emblem..."
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

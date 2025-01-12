@@ -64,6 +64,8 @@ func deselect_button(button: TextureButton) -> void:
 func selection_changed(id: int) -> void:
 	# Logic for when the selection changes
 	print("Selection changed to:", id)
+	var emblem_name = emblems[current_selection_id]
+	$"Description box".text = "[center]"+ str(info_table.emblems[emblem_name]["description"])
 
 
 func _on_start_button_pressed() -> void:
