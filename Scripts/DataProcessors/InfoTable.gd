@@ -17,18 +17,30 @@ var emblems: Dictionary = {
 		"effect": "mult_4",
 		"display_name": "Red Brick"
 	},
+	"pink_brick": {
+		"description": "Increases number of inactive tiles on board by 1.",
+		"sprite": "res://Assets/BrickSprites/PinkBrick.png",
+		"effect": "obst_increase_1",
+		"display_name": "Pink Brick"
+	},
 	"fluffy_cat": {
 		"description": "Adds 20 to base player damage.",
 		"sprite": "res://Assets/EmblemSprites/FluffyCat.png",
 		"effect": "damage_20",
 		"display_name": "Fluffy Cat"
 	},
-		"round_cat": {
+	"round_cat": {
 		"description": "Adds 4 to base damage multiplier.",
 		"sprite": "res://Assets/EmblemSprites/RoundCat.png",
 		"effect": "mult_4",
 		"display_name": "Round Cat"
 	},
+	"triangle_cat": {
+		"description": "Adds 1 to base damage for each active tile in completed puzzle.",
+		"sprite": "res://Assets/EmblemSprites/TriangleCat.png",
+		"effect": "tile_damage_1",
+		"display_name": "Triangle Cat"
+	}
 }
 
 # ---------------- CONSUMABLES ------------------ #

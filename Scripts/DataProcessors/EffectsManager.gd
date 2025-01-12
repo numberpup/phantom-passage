@@ -22,6 +22,14 @@ var effects_dict = {
 		"activate": func(): mult_increase(4),
 		"deactivate": func(): mult_increase(-4),
 	},
+	"tile_damage_1": {
+		"activate": func(): tile_damage(1),
+		"deactivate": func(): tile_damage(-1),
+	},
+	"obst_increase_1": {
+		"activate": func(): obst_increase(1),
+		"deactivate": func(): obst_increase(-1),
+	}
 }
 
 func _ready() -> void:
@@ -56,6 +64,13 @@ func damage_mults(amount) -> void:
 func mult_mults(amount) -> void:
 	GameManager.player_damage_mult *= amount
 	recalculate_effective_damage()
+
+func tile_damage(amount) -> void:
+	var tile_number = (GameManager.board_size * GameManager.board_size) - GameManager.board_obstacle_count
+	damage_increase(tile_number)
+
+func obst_increase(amount) -> void:
+	GameManager.board_obstacle_count += 1
 
 func recalculate_effects() -> void:
 	for emblem_name in emblem_names:

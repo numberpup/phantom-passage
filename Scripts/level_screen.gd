@@ -168,6 +168,7 @@ func progress_encounter() -> void:
 			GameManager.current_level = 1
 			GameManager.current_floor += 1
 		await get_tree().create_timer(.3).timeout
+		EffectsManager.deactivate_effects()
 		get_tree().change_scene_to_file("res://Scenes/UI/ShopScreen.tscn")
 	else:
 		current_enemy = encounter_table.floors[GameManager.current_floor][GameManager.current_level][current_encounter]
@@ -179,7 +180,6 @@ func _level_complete() -> void:
 
 
 func _on_button_pressed() -> void:
-	
 	get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 
 

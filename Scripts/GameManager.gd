@@ -66,6 +66,7 @@ func reset():
 	current_floor = 1
 	current_level = 1
 	current_encounter = 1
+	player_emblems = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

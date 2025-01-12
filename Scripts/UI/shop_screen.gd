@@ -2,7 +2,7 @@ extends Control
 
 @onready var info_table = preload("res://Scripts/DataProcessors/InfoTable.gd").new()
 @onready var item_container = $ItemContainer
-var emblems = ["fluffy_cat", "round_cat"]
+var emblems = ["fluffy_cat", "round_cat", "triangle_cat"]
 
 var current_selection_id = 0
 var current_selection: TextureButton = null  # Store the currently selected button
@@ -11,7 +11,16 @@ var current_selection: TextureButton = null  # Store the currently selected butt
 func _ready() -> void:
 	$SceneTransition/ColorRect.color.a = 255
 	$SceneTransition/AnimationPlayer.play("fade_out")
+	generate_emblems()
 	display_shop_items()
+
+func generate_emblems() -> void:
+	for i in 2:
+		var size_of_dict = info_table.emblems.size()
+		var random_key = info_table.emblems.keys()[randi() % size_of_dict]
+		print("random_key: " + str(random_key))
+		var emblem_name = random_key
+		emblems[i] = emblem_name
 
 func display_shop_items() -> void:
 	var array_id = 0
