@@ -116,6 +116,18 @@ text = "0"
 layout_mode = 1
 offset_bottom = -1632.0
 
+[node name="EmblemContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 700)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 32.0
+offset_top = 326.0
+offset_right = 132.0
+offset_bottom = 1056.0
+theme_override_constants/separation = 25
+alignment = 1
+script = ExtResource("7_u0al2")
+
 [node name="DamageDisplay" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -131,17 +143,65 @@ theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[center]"
 
-[node name="EmblemContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(100, 700)
+[node name="MultLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
-anchors_preset = -1
-offset_left = 32.0
-offset_top = 326.0
-offset_right = 132.0
-offset_bottom = 1056.0
-theme_override_constants/separation = 25
-alignment = 1
-script = ExtResource("7_u0al2")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 170.0
+offset_top = 173.0
+offset_right = 320.0
+offset_bottom = 207.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("3_6xjha")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]1"
+
+[node name="DamageLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 173.0
+offset_right = -170.0
+offset_bottom = 207.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("3_6xjha")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]40"
+
+[node name="BaseDamageText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 215.0
+offset_right = -157.0
+offset_bottom = 255.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("3_6xjha")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]BASE DMG"
+
+[node name="BaseDamageText2" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 160.0
+offset_top = 215.0
+offset_right = 325.0
+offset_bottom = 255.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("3_6xjha")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]DMG MULT"
 
 [connection signal="enemy_turn" from="." to="MarginContainer/GameBoard" method="_on_enemy_turn"]
 [connection signal="timeout" from="TimerContainer/Timer" to="." method="_on_timer_end"]

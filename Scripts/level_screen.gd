@@ -23,6 +23,9 @@ func _ready() -> void:
 	score_display.text = str(score)
 	connect_board_clear_signal()  # Connect the board clear signal
 	
+	$DamageLabel.text = "[center]" + str(GameManager.player_base_damage)
+	$MultLabel.text = "[center]" + str(GameManager.player_damage_mult)
+	
 	#connect signal from gameboard that enemy turn has triggered damage
 	game_board.connect("enemy_attack", Callable(self, "_player_takes_damage"))
 	
