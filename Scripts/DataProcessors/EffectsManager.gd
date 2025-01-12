@@ -70,7 +70,7 @@ func tile_damage(amount) -> void:
 	damage_increase(tile_number)
 
 func obst_increase(amount) -> void:
-	GameManager.board_obstacle_count += 1
+	GameManager.board_obstacle_count += amount
 
 func recalculate_effects() -> void:
 	for emblem_name in emblem_names:

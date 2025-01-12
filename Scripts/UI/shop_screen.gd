@@ -11,6 +11,7 @@ var current_selection: TextureButton = null  # Store the currently selected butt
 func _ready() -> void:
 	$SceneTransition/ColorRect.color.a = 255
 	$SceneTransition/AnimationPlayer.play("fade_out")
+	EffectsManager.deactivate_effects()
 	generate_emblems()
 	display_shop_items()
 

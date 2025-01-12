@@ -73,7 +73,7 @@ bbcode_enabled = true
 text = "[center]15"
 
 [node name="Timer" type="Timer" parent="TimerContainer"]
-wait_time = 5.0
+wait_time = 6.0
 one_shot = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
