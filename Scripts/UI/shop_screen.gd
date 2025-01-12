@@ -67,4 +67,7 @@ func selection_changed(id: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
+	GameManager.player_emblems.append(emblems[current_selection_id])
+	EffectsManager.recalculate_effects()
+	EffectsManager.recalculate_effective_damage()
 	get_tree().change_scene_to_file("res://Scenes/UI/ProgressionScreen.tscn")

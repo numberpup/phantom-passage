@@ -40,6 +40,7 @@ func deactivate_effects() -> void:
 
 # EFFECT FUNCTIONS
 func damage_increase(amount) -> void:
+	print("damage increase called")
 	GameManager.player_base_damage += amount
 	recalculate_effective_damage()
 	
@@ -56,8 +57,16 @@ func mult_mults(amount) -> void:
 	GameManager.player_damage_mult *= amount
 	recalculate_effective_damage()
 
+func recalculate_effects() -> void:
+	for emblem_name in emblem_names:
+		print("emblem name: " + emblem_name)
+		var effect = info_table.emblems[emblem_name]["effect"]
+		print(effects_dict[effect])
+		effects_dict[effect]["activate"].call()
+
 func recalculate_effective_damage() -> void:
 	GameManager.effective_player_damage = GameManager.player_base_damage * GameManager.player_damage_mult
+	print("Calculated damage: " + str(GameManager.effective_player_damage))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

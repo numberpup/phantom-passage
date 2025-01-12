@@ -24,9 +24,9 @@ var emblems: Dictionary = {
 		"display_name": "Fluffy Cat"
 	},
 		"round_cat": {
-		"description": "Adds 40 to base player damage.",
+		"description": "Adds 4 to base damage multiplier.",
 		"sprite": "res://Assets/EmblemSprites/RoundCat.png",
-		"effect": "damage_40",
+		"effect": "mult_4",
 		"display_name": "Round Cat"
 	},
 }
