@@ -31,6 +31,8 @@ signal enemy_attack
 # DO THIS BEFORE CALLING add_child
 # THEREFORE THE DATA WILL BE THERE BEFORE _ready IS CALLED
 
+var enemy_floor_multipliers = [1, 1, 2, 4, 10, 20]
+
 func _setup(enemy: String, enemy_type: String) -> void:
 	InfoTable = preload("res://Scripts/DataProcessors/InfoTable.gd").new()
 	if enemy_type == "enemy":
@@ -45,17 +47,28 @@ func _setup(enemy: String, enemy_type: String) -> void:
 		print("Unrecognized enemy_type")
 
 func enemy_init(enemy: String) -> void:
+	# grab enemy_floor_multiplier
+	var mult = enemy_floor_multipliers[GameManager.current_floor]
+	print("MULT: " + str(mult))
+	
 	# Enemy stats
 	enemy_key = enemy
 	enemy_name = InfoTable.enemies[enemy]["name"]
-	health = InfoTable.enemies[enemy]["hp"]
-	max_health = InfoTable.enemies[enemy]["hp"]
-	attack_power = InfoTable.enemies[enemy]["atk"]
+	health = InfoTable.enemies[enemy]["hp"]*mult
+	max_health = InfoTable.enemies[enemy]["hp"]*mult
+	attack_power = InfoTable.enemies[enemy]["atk"]*mult
+	
+	print("inside enemyshell: hp: " + str(max_health))
+	print("inside enemyshell: attack: " + str(attack_power))
 	
 	# Update global enemy stats
 	GameManager.enemy_health_max = InfoTable.enemies[enemy]["hp"]
 	GameManager.enemy_health = InfoTable.enemies[enemy]["hp"]
 	GameManager.enemy_attack = attack_power
+	
+	print("inside enemyshell: gamemanager enemy hp: " + str(GameManager.enemy_health_max))
+	print("inside enemyshell: gamemanager attack: " + str(GameManager.enemy_attack))
+	
 	emit_signal("updated_enemy_health")
 	print("Inside enemy_init, enemyhealth: " + str(GameManager.enemy_health_max))
 	
