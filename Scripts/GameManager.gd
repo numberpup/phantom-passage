@@ -50,7 +50,7 @@ var enemy_attack = 10
 var enemy_effects = []
 
 # Turn management variables
-@export var turn_time: float = 15.0
+@export var turn_time: float = 6
 
 # ----------------- #
 # --- Functions --- #
@@ -61,6 +61,7 @@ func reset():
 	board_obstacle_count = 5
 	player_base_damage = 40
 	player_damage_mult = 1
+	effective_player_damage = 40
 	player_hp_max = 100
 	player_hp = 100
 	current_floor = 1
