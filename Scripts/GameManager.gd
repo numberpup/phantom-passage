@@ -30,9 +30,9 @@ var effective_player_damage = 40
 
 # Stores emblems.
 var player_emblems = [
-	"green_brick",
-	"red_brick",
-	"fluffy_cat"
+	#"green_brick",
+	#"red_brick",
+	#"fluffy_cat"
 ]
 
 var player_consumables = [] # Stores usable items.

@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://c01buo1h3pl6q"]
+
+[ext_resource type="Script" path="res://Scripts/UI/shop_screen.gd" id="1_quyyl"]
+[ext_resource type="Texture2D" uid="uid://i0gii2epgm70" path="res://Assets/spookyhallway.png" id="2_d4eqp"]
+[ext_resource type="PackedScene" uid="uid://bb1nn8ufi2ofn" path="res://Scenes/button.tscn" id="3_b3pwv"]
+[ext_resource type="PackedScene" uid="uid://csrr4nf3h47p8" path="res://Scripts/UI/SceneTransition.tscn" id="5_x5oxp"]
+
+[sub_resource type="Theme" id="Theme_y1dxn"]
+
+[node name="ShopScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_quyyl")
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2560.0
+offset_top = -1440.0
+offset_right = 2560.0
+offset_bottom = 1440.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_d4eqp")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="ItemContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -305.0
+offset_top = -100.0
+offset_right = 305.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y1dxn")
+theme_override_constants/h_separation = 20
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="StartButton" parent="." instance=ExtResource("3_b3pwv")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.775
+anchor_bottom = 0.775
+offset_left = -291.5
+offset_top = -160.0
+offset_right = 291.5
+offset_bottom = 0.0
+grow_vertical = 0
+
+[node name="SceneTransition" parent="." instance=ExtResource("5_x5oxp")]
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

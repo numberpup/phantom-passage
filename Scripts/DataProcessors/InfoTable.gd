@@ -22,7 +22,13 @@ var emblems: Dictionary = {
 		"sprite": "res://Assets/EmblemSprites/FluffyCat.png",
 		"effect": "damage_20",
 		"display_name": "Fluffy Cat"
-	}
+	},
+		"round_cat": {
+		"description": "Adds 40 to base player damage.",
+		"sprite": "res://Assets/EmblemSprites/RoundCat.png",
+		"effect": "damage_40",
+		"display_name": "Round Cat"
+	},
 }
 
 # ---------------- CONSUMABLES ------------------ #

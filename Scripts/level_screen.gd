@@ -91,7 +91,8 @@ func _on_enemy_died() -> void:
 	$TimerContainer/Timer.stop()
 	$TimerContainer.visible = false
 	progress_encounter()
-	instantiate_enemy()
+	if not current_encounter > 3:
+		instantiate_enemy()
 
 func on_timer_change() -> void:
 	$TimerContainer/TimerLabel.text = "[center]" + str(ceil($TimerContainer/Timer.time_left))
@@ -161,10 +162,16 @@ func player_dies():
 
 func progress_encounter() -> void:
 	current_encounter = current_encounter + 1
-	if current_encounter > 4:
-		current_encounter = 1
-	current_enemy = encounter_table.floors[1][1][current_encounter]
-	print (current_enemy)
+	if current_encounter > 3:
+		GameManager.current_level += 1
+		if GameManager.current_level > 3:
+			GameManager.current_level = 1
+			GameManager.current_floor += 1
+		await get_tree().create_timer(.3).timeout
+		get_tree().change_scene_to_file("res://Scenes/UI/ShopScreen.tscn")
+	else:
+		current_enemy = encounter_table.floors[GameManager.current_floor][GameManager.current_level][current_encounter]
+		print (current_enemy + str(encounter_table.floors[GameManager.current_floor][GameManager.current_level][current_encounter]))
 
 # WILL POPULATE ONCE LEVELS AND PROGRESSION ARE IMPLEMENTED
 func _level_complete() -> void:
